@@ -1,8 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter as FontSans } from "next/font/google";
+import { Allura as Cursive } from "next/font/google";
+import { cn } from "@/lib/utils";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import Navigation from "@/components/Navigation";
+import AppBar from "@/components/AppBar";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const cursive = Cursive({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-cursive",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +29,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable,
+          cursive.variable
+        )}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navigation loggedIn={false} />
+          {children}
+          <AppBar />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
