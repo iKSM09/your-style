@@ -2,6 +2,7 @@
 import React, { ReactNode } from "react";
 
 import ProductCard from "./ProductCard";
+import Container from "./Container";
 
 type ProductListProps = {
   title: string;
@@ -10,7 +11,7 @@ type ProductListProps = {
 
 const ProductListSection = ({ title, children }: ProductListProps) => {
   return (
-    <div className="p-8">
+    <Container>
       <h2 className="text-3xl font-bold">{title}</h2>
 
       <div className="grid items-end gap-4 my-6 grid-cols-productList">
@@ -27,7 +28,7 @@ const ProductListSection = ({ title, children }: ProductListProps) => {
         <ProductCard />
         <ProductCard />
       </div>
-    </div>
+    </Container>
   );
 };
 
